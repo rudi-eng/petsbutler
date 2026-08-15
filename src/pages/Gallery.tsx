@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { gallery } from '@/data/gallery'
-import { Placeholder } from '@/components/Placeholder'
 import { Lightbox } from '@/components/Lightbox'
 
 export default function Gallery() {
@@ -33,7 +32,7 @@ export default function Gallery() {
                 onClick={() => open(i)}
                 aria-label={`Open photo: ${item.caption}`}
               >
-                <Placeholder label={item.caption} variant="gallery" seed={i + 1} />
+                <img src={item.src} alt={item.caption} />
               </button>
             ))}
           </div>
@@ -45,6 +44,7 @@ export default function Gallery() {
           index={active}
           total={gallery.length}
           caption={gallery[active].caption}
+          src={gallery[active].src}
           onClose={close}
           onNav={nav}
         />

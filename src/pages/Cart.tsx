@@ -13,7 +13,7 @@ export default function Cart() {
         <section className="page-head">
           <div className="container">
             <h1>Your cart</h1>
-            <p>Nothing here yet — pick up some small-batch treats.</p>
+            <p>Nothing here yet — pick up a tick kit, walk belt or overnight bag.</p>
           </div>
         </section>
         <section className="section" style={{ paddingTop: 0 }}>

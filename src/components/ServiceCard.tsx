@@ -1,14 +1,15 @@
+import { Link } from 'react-router-dom'
 import type { Service } from '@/data/services'
-import { formatZar, business } from '@/data/business'
-import { whatsappLink } from '@/lib/whatsapp'
+import { formatZar } from '@/data/business'
 
 export function ServiceCard({ service }: { service: Service }) {
   const price = formatZar(service.priceFrom)
-  const message = `Hi The Pet's Butler! I'd like to book ${service.name} (from ${price}).`
-  const link = whatsappLink(message)
 
   return (
     <article className="card">
+      <div className="card__media">
+        <img src={service.image} alt={service.name} />
+      </div>
       <div className="card__body">
         <div
           style={{
@@ -33,15 +34,12 @@ export function ServiceCard({ service }: { service: Service }) {
             <br />
             <small className="muted">{service.duration}</small>
           </span>
-          <a
+          <Link
             className="btn btn--primary"
-            href={`https://wa.me/${business.whatsapp}?text=${encodeURIComponent(message)}`}
-            target="_blank"
-            rel="noreferrer"
-            onClick={() => link}
+            to={`/booking?service=${service.id}`}
           >
-            Book
-          </a>
+            Book Sitter
+          </Link>
         </div>
       </div>
     </article>

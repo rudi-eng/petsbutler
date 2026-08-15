@@ -8,7 +8,7 @@ export function Footer() {
       <div className="container">
         <div className="footer__grid">
           <div>
-            <LogoMark size={36} light />
+            <LogoMark size={72} light />
             <h4>The Pet's Butler</h4>
             <p style={{ maxWidth: 320, margin: 0 }}>
               Premium pet sitting, dog walking and pet products in Centurion, Gauteng.

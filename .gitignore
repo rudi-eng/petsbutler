@@ -3,8 +3,7 @@ node_modules
 .pnp
 .pnp.js
 
-# build output
-dist
+# Vite SSR intermediate output
 dist-ssr
 
 # local env

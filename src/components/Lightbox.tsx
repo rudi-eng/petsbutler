@@ -1,15 +1,15 @@
 import { useCallback, useEffect } from 'react'
-import { Placeholder } from './Placeholder'
 
 interface LightboxProps {
   index: number
   total: number
   caption: string
+  src: string
   onClose: () => void
   onNav: (dir: number) => void
 }
 
-export function Lightbox({ index, total, caption, onClose, onNav }: LightboxProps) {
+export function Lightbox({ index, total, caption, src, onClose, onNav }: LightboxProps) {
   const handleKey = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
@@ -50,9 +50,7 @@ export function Lightbox({ index, total, caption, onClose, onNav }: LightboxProp
         </>
       )}
       <div style={{ textAlign: 'center' }} onClick={(e) => e.stopPropagation()}>
-        <div style={{ maxWidth: 'min(900px, 100%)', margin: '0 auto' }}>
-          <Placeholder label={caption} variant="gallery" seed={index + 1} />
-        </div>
+        <img className="lightbox__img" src={src} alt={caption} />
         <p style={{ color: 'rgba(255,255,255,0.92)', marginTop: '1rem', marginBottom: 0 }}>
           {caption} · {index + 1} / {total}
         </p>

@@ -1,6 +1,6 @@
 # The Pet's Butler — Cloudflare Pages (static Vite + React SPA)
-# Framework preset: Vite · Build command: npm run build · Output: dist · Root: /
+# Output: ./dist (committed). Optional dashboard build: npm run build
 
 name = "petsbutler"
 compatibility_date = "2026-08-14"
-pages_build_output_dir = "dist"
+pages_build_output_dir = "./dist"

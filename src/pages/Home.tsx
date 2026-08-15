@@ -3,18 +3,13 @@ import { ReviewBadge } from '@/components/ReviewBadge'
 import { ServiceCard } from '@/components/ServiceCard'
 import { ProductCardMini } from '@/components/ProductCard'
 import { services } from '@/data/services'
-import { products } from '@/data/products'
+import { featuredProducts } from '@/data/products'
 import { reviews } from '@/data/reviews'
 import { business } from '@/data/business'
-import { formatZar } from '@/data/business'
-import { whatsappLink } from '@/lib/whatsapp'
-import { Placeholder } from '@/components/Placeholder'
+import { gallery, heroPhoto } from '@/data/gallery'
 
 export default function Home() {
-  const featured = products.slice(0, 4)
-  const heroBookLink = whatsappLink(
-    `Hi The Pet's Butler! I'd like to book a service. Could you tell me what's available?`,
-  )
+  const featured = featuredProducts
 
   return (
     <>
@@ -27,31 +22,30 @@ export default function Home() {
             </div>
             <h1>Your dog's home away from home — in Centurion.</h1>
             <p className="muted" style={{ fontSize: '1.15rem', maxWidth: 540 }}>
-              Pet sitting, dog walking & house visits run by a head-butler-of-pets.
-              Cage-free, force-free, photo-updates-included — plus our own range of
-              small-batch treats & gear.
+              Premium pet sitting, dog walking & house visits run by a head-butler-of-pets.
+              Cage-free, force-free care, with custom gourmet treats and cosy blankets, plus a boutique store for trendy pet gear.
             </p>
             <div className="hero__cta">
-              <a className="btn btn--primary" href={heroBookLink} target="_blank" rel="noreferrer">
-                Book on WhatsApp →
-              </a>
-              <Link className="btn btn--ghost" to="/booking">
-                Full booking form
+              <Link className="btn btn--primary" to="/booking">
+                Book a Sitter →
+              </Link>
+              <Link className="btn btn--ghost" to="/shop">
+                Shop Pet Gear
               </Link>
             </div>
             <ul style={{ listStyle: 'none', padding: 0, marginTop: '1.5rem', display: 'flex', gap: '1.5rem', flexWrap: 'wrap', color: 'var(--muted)' }}>
               <li>✓ Same-day replies</li>
-              <li>✓ GPS-tracked walks</li>
+              <li>✓ Daily photo/video updates</li>
               <li>✓ Free meet-and-greet</li>
             </ul>
           </div>
 
           <div className="hero__media">
-            <Placeholder label="The Pet's Butler" variant="hero" seed={3} />
+            <img src={heroPhoto.src} alt={heroPhoto.alt} />
             <div className="hero__rating">
               <span className="stars">★★★★★</span>
               <span>5.0</span>
-              <small style={{ color: 'var(--muted)' }}>· Google</small>
+              <small style={{ color: 'var(--muted)' }}>· Google Reviews</small>
             </div>
           </div>
         </div>
@@ -62,14 +56,17 @@ export default function Home() {
         <div className="container">
           <div className="section-head">
             <div className="eyebrow">What we do</div>
-            <h2>Pet care, done properly</h2>
-            <p>Four ways we look after your best friend — pick one and we'll handle the rest over WhatsApp.</p>
+            <h2>Premium Pet Care, Tailored for Centurion</h2>
+            <p>Four ways we look after your best friend — select one to build your custom sitter package and add tasty treats.</p>
           </div>
           <div className="grid grid--3">
             {services.map((s) => (
               <ServiceCard key={s.id} service={s} />
             ))}
             <article className="card">
+              <div className="card__media">
+                <img src="/photos/golden-sit.jpg" alt="Pet sitting discussion" />
+              </div>
               <div className="card__body">
                 <div
                   style={{
@@ -79,12 +76,12 @@ export default function Home() {
                   }}
                   aria-hidden="true"
                 >🎁</div>
-                <h3 className="card__title">Not sure?</h3>
-                <p className="card__desc">Tell us about your pet and we'll suggest the right service. Free 15-minute meet-and-greet on every first booking.</p>
-                <div className="card__footer">
-                  <a className="btn btn--sand" href={`https://wa.me/${business.whatsapp}`} target="_blank" rel="noreferrer">
-                    Ask us
-                  </a>
+                <h3 className="card__title">Custom Request?</h3>
+                <p className="card__desc">Tell us about your pet's routine, medication, or diet. Free 15-minute meet-and-greet included with every first booking.</p>
+                <div className="card__footer" style={{ marginTop: 'auto' }}>
+                  <Link className="btn btn--sand" to="/booking">
+                    Request Booking
+                  </Link>
                 </div>
               </div>
             </article>
@@ -97,21 +94,42 @@ export default function Home() {
         <div className="container">
           <div className="section-head">
             <div className="eyebrow">Why owners choose us</div>
-            <h2>5-star care, every visit</h2>
+            <h2>Professional, 5-Star Pet Sittings</h2>
           </div>
           <div className="grid grid--3">
             <div className="card"><div className="card__body">
               <h3 className="card__title">Cage-free, force-free</h3>
-              <p className="card__desc">No kennels, no shouting. Your dog lives as part of the family — couch privileges included.</p>
+              <p className="card__desc">No kennels, no cold floors. Your dog lives as part of our loving family — couch privileges and comfortable blankets included.</p>
             </div></div>
             <div className="card"><div className="card__body">
-              <h3 className="card__title">Photo & GPS updates</h3>
-              <p className="card__desc">A morning photo diary and a tracked walk map with every booking. Peace of mind as standard.</p>
+              <h3 className="card__title">Daily Photo/Video Diaries</h3>
+              <p className="card__desc">Morning updates, afternoon play videos, and meal check-ins with every single booking. Peace of mind guaranteed.</p>
             </div></div>
             <div className="card"><div className="card__body">
-              <h3 className="card__title">Small-batch products</h3>
-              <p className="card__desc">We make our own treats, paw balm and gear — the same stuff we use on the dogs we care for.</p>
+              <h3 className="card__title">Bespoke Treats & Comfort</h3>
+              <p className="card__desc">Customize their stay with peanut-butter treats, salmon bites, fresh greens, or a cozy fleece blanket to keep.</p>
             </div></div>
+          </div>
+        </div>
+      </section>
+
+      {/* PHOTO STRIP */}
+      <section className="section section--tight">
+        <div className="container">
+          <div className="section-head">
+            <div className="eyebrow">Gallery</div>
+            <h2>Life at the butler's</h2>
+            <p>Real guests, happy tails — a peek at walks, sleepovers, and house visits in Centurion.</p>
+          </div>
+          <div className="photo-strip">
+            {gallery.slice(0, 8).map((item) => (
+              <Link key={item.id} to="/gallery" className="photo-strip__item" aria-label={item.caption}>
+                <img src={item.src} alt={item.caption} />
+              </Link>
+            ))}
+          </div>
+          <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+            <Link className="btn btn--ghost" to="/gallery">See the full gallery →</Link>
           </div>
         </div>
       </section>
@@ -120,16 +138,16 @@ export default function Home() {
       <section className="section">
         <div className="container">
           <div className="section-head">
-            <div className="eyebrow">From our shop</div>
-            <h2>Tried & tested by the butler</h2>
-            <p>The same treats and gear we use on every pet we look after.</p>
+            <div className="eyebrow">Our Boutique Shop</div>
+            <h2>Tried & Tested Trendy Gear</h2>
+            <p>Biliary tick defense, load-shedding walk lights, hands-free leads, and cozy custom dog blankets.</p>
           </div>
           <div className="grid grid--4">
             {featured.map((p) => (
               <ProductCardMini key={p.id} product={p} />
             ))}
           </div>
-          <div style={{ textAlign: 'center', marginTop: '1.5rem' }}>
+          <div style={{ textAlign: 'center', marginTop: '2rem' }}>
             <Link className="btn btn--ghost" to="/shop">Browse the full shop →</Link>
           </div>
         </div>
@@ -139,19 +157,21 @@ export default function Home() {
       <section className="section section--tight" style={{ background: 'var(--sand)' }}>
         <div className="container">
           <div className="section-head">
-            <div className="eyebrow">Reviews</div>
+            <div className="eyebrow">Client Love</div>
             <h2>What Gauteng pet parents say</h2>
-            <ReviewBadge />
+            <div style={{ marginTop: '0.5rem' }}>
+              <ReviewBadge />
+            </div>
           </div>
           <div className="grid grid--3">
             {reviews.slice(0, 3).map((r) => (
               <article key={r.author} className="card">
                 <div className="card__body">
-                  <div className="stars" style={{ color: '#F4A33A', letterSpacing: '2px' }}>
+                  <div className="stars" style={{ color: '#F4A33A', letterSpacing: '2px', marginBottom: '0.5rem' }}>
                     {'★'.repeat(r.stars)}
                   </div>
-                  <p className="card__desc" style={{ fontStyle: 'italic' }}>"{r.text}"</p>
-                  <div style={{ marginTop: 'auto' }}>
+                  <p className="card__desc" style={{ fontStyle: 'italic', fontSize: '0.94rem' }}>"{r.text}"</p>
+                  <div style={{ marginTop: 'auto', paddingTop: '0.75rem' }}>
                     <strong>{r.author}</strong>
                     <br />
                     <small className="muted">{r.pet} · {r.date}</small>
@@ -163,29 +183,61 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CONTACT STRIP */}
+      {/* INTERACTIVE CONTACT & GOOGLE MAPS */}
       <section className="section">
         <div className="container">
-          <div className="contact-strip">
-            <div>
-              <h2>Ready to book?</h2>
-              <p>Message us on WhatsApp for the fastest reply — usually within the hour during opening hours.</p>
-              <ul className="contact-strip__list">
-                <li>📍 {business.address.line1}, {business.address.line2}, {business.address.city}</li>
-                <li>📞 {business.phonePrimary}</li>
-                <li>🕑 Mon–Fri 7AM–6PM · Sat 8AM–4PM · Sun closed</li>
+          <div className="maps-section">
+            <div className="maps-info">
+              <span className="eyebrow">Find the Butler</span>
+              <h2>Located in Centurion</h2>
+              <p>
+                Our premium pet care services operate throughout Centurion, Gauteng, with our main boarding home nestled in the peaceful suburb of <strong>The Reeds</strong>.
+              </p>
+              
+              <ul className="maps-details-list">
+                <li>
+                  <span className="icon">📍</span>
+                  <span>{business.address.line1}, {business.address.line2}, {business.address.city}, {business.address.postalCode}</span>
+                </li>
+                <li>
+                  <span className="icon">🕑</span>
+                  <span>Mon–Fri 7:00 AM – 6:00 PM · Sat 8:00 AM – 4:00 PM · Sun Closed</span>
+                </li>
+                <li>
+                  <span className="icon">📞</span>
+                  <span><a href={`tel:${business.phonePrimary.replace(/\s/g, '')}`}>{business.phonePrimary}</a> (Primary Sitter)</span>
+                </li>
+                <li>
+                  <span className="icon">💬</span>
+                  <span><a href={`https://wa.me/${business.whatsapp}`} target="_blank" rel="noreferrer">Chat immediately on WhatsApp</a></span>
+                </li>
               </ul>
+
+              <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.75rem', flexWrap: 'wrap' }}>
+                <a
+                  className="btn btn--primary"
+                  href={`https://www.google.com/maps/dir/?api=1&destination=${business.address.coords.lat},${business.address.coords.lng}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Get Driving Directions 🗺️
+                </a>
+                <Link className="btn btn--ghost" to="/booking">
+                  Go to Booking Portal
+                </Link>
+              </div>
             </div>
-            <div className="contact-strip__cta">
-              <a className="btn btn--sand" href={`https://wa.me/${business.whatsapp}`} target="_blank" rel="noreferrer">
-                WhatsApp us
-              </a>
-              <Link className="btn btn--sand" to="/booking" style={{ color: 'var(--charcoal)', borderColor: 'var(--sand)' }}>
-                Full booking form
-              </Link>
-              <Link className="btn btn--sand" to="/shop" style={{ color: 'var(--charcoal)' }}>
-                Shop products from {formatZar(65)}
-              </Link>
+
+            <div className="maps-embed-card">
+              <iframe
+                src="https://maps.google.com/maps?q=-25.9057969,28.1504777&z=15&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0, minHeight: '340px', borderRadius: 'var(--radius)' }}
+                allowFullScreen
+                loading="lazy"
+                title="The Pet's Butler Centurion Google Maps Location"
+              ></iframe>
             </div>
           </div>
         </div>
