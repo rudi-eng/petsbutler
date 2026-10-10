@@ -11,7 +11,7 @@ interface SitterAddon {
   desc: string
   price: number
   type: 'daily' | 'flat'
-  petType: 'Dog' | 'Cat' | 'Bird' | 'Fish' | 'Snake' | 'Other'
+  petType: 'Dog' | 'Cat' | 'Bird' | 'Fish' | 'Snake' | 'Other' | 'All'
 }
 
 interface PetDetails {
@@ -131,6 +131,14 @@ const sitterAddons: SitterAddon[] = [
     type: 'flat',
     petType: 'Other',
   },
+  {
+    id: 'food-water-bowl',
+    name: 'Food & Water Bowl',
+    desc: 'A small 400 ml bowl for food or drinking water. R50 per pet; add two for separate food and water bowls.',
+    price: 50,
+    type: 'flat',
+    petType: 'All',
+  },
 ]
 
 export default function Booking() {
@@ -164,7 +172,7 @@ export default function Booking() {
   }, [serviceId])
 
   const availableAddons = useMemo(() => {
-    return sitterAddons.filter((a) => pets.some((pet) => pet.type === a.petType))
+    return sitterAddons.filter((a) => a.petType === 'All' || pets.some((pet) => pet.type === a.petType))
   }, [pets])
 
   // Calculate number of booking days
@@ -201,7 +209,7 @@ export default function Booking() {
     return selectedAddons.map((id) => {
       const addon = sitterAddons.find((a) => a.id === id)!
       const duration = addon.type === 'daily' ? (isMultiDayService ? daysCount : sessionCount) : 1
-      const petCount = pets.filter((pet) => pet.type === addon.petType).length
+      const petCount = addon.petType === 'All' ? pets.length : pets.filter((pet) => pet.type === addon.petType).length
       const totalCost = addon.price * duration * petCount
       return {
         ...addon,
@@ -238,8 +246,8 @@ export default function Booking() {
             .map(
               (a) =>
                 `  • ${a.name} (${formatZar(a.price)}${
-                  a.type === 'daily' ? '/day' : ''
-                } × ${a.duration} = ${formatZar(a.totalCost)})`
+                  a.type === 'daily' ? '/day' : a.petType === 'All' ? ' each' : ''
+                } × ${a.duration} × ${a.petCount} pet${a.petCount === 1 ? '' : 's'} = ${formatZar(a.totalCost)})`
             )
             .join('\n')
         : '  • None selected (owner opted out)'
@@ -501,7 +509,10 @@ export default function Booking() {
                     const displayPrice =
                       addon.type === 'daily'
                         ? `${formatZar(addon.price)} / day`
-                        : `${formatZar(addon.price)} flat`
+                        : addon.petType === 'All'
+                          ? `${formatZar(addon.price)} each`
+                          : `${formatZar(addon.price)} flat`
+                    const addonPetCount = addon.petType === 'All' ? pets.length : pets.filter((pet) => pet.type === addon.petType).length
                     return (
                       <div
                         key={addon.id}
@@ -518,7 +529,7 @@ export default function Booking() {
                           <span className="treat-item-desc muted">{addon.desc}</span>
                         </div>
                         <div className="treat-item-price">
-                      <strong>{displayPrice}{addon.type === 'daily' && pets.filter((pet) => pet.type === addon.petType).length > 1 ? ` × ${pets.filter((pet) => pet.type === addon.petType).length} pets` : ''}</strong>
+                      <strong>{displayPrice}{(addon.type === 'daily' || addon.petType === 'All') && addonPetCount > 1 ? ` × ${addonPetCount} pets` : ''}</strong>
                         </div>
                       </div>
                     )
@@ -629,7 +640,7 @@ export default function Booking() {
                           <small className="muted">
                             {item.type === 'daily'
                               ? `${formatZar(item.price)} × ${item.duration} days × ${item.petCount} ${item.petCount === 1 ? 'pet' : 'pets'}`
-                              : `${formatZar(item.price)} flat × ${item.petCount} ${item.petCount === 1 ? 'pet' : 'pets'}`}
+                              : `${formatZar(item.price)}${item.petType === 'All' ? ' each' : ' flat'} × ${item.petCount} ${item.petCount === 1 ? 'pet' : 'pets'}`}
                           </small>
                         </span>
                         <strong>{formatZar(item.totalCost)}</strong>
