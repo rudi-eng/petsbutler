@@ -542,7 +542,13 @@ export default function Booking() {
             {/* LIVE COST ESTIMATE SIDEBAR */}
             <aside className="booking-sidebar">
               <div className="booking-summary-card">
-                <h3>Live Cost Breakdown</h3>
+                <h3>{fullyBooked ? 'Availability update' : 'Live Cost Breakdown'}</h3>
+                {fullyBooked ? (
+                  <div className="stack">
+                    <p className="muted">There are no bookable spaces for this service right now. Please call us to ask about cancellations or future dates.</p>
+                    <a className="btn btn--primary" href={`tel:${business.phonePrimary.replace(/\s/g, '')}`}>Call {business.phonePrimary}</a>
+                  </div>
+                ) : <>
                 <div className="summary-section">
                   <span className="summary-section__title">Sitter Service</span>
                   <div className="summary-row">
@@ -598,6 +604,7 @@ export default function Booking() {
                     <li>✓ Comprehensive, reassuring updates.</li>
                   </ul>
                 </div>
+                </>}
               </div>
             </aside>
 
