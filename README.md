@@ -1,6 +1,6 @@
 # The Pet's Butler
 
-Centurion pet-care website for The Pet's Butler, founded by Rudi Beukes in 1997. The project combines a responsive React/TypeScript front end with a Gauteng service-area prompt, suburb-based travel estimates, a multi-pet booking form and WhatsApp enquiries.
+Centurion pet-care website for The Pet's Butler, part of Aslana Intelligence (Pty) Ltd and founded by Rudi Beukes in 1997. The project combines a responsive React/TypeScript front end with a Gauteng service-area prompt, suburb-based travel estimates, a multi-pet booking form and WhatsApp enquiries.
 
 **Live site:** [thepetsbutler.com](https://thepetsbutler.com) · **Stack:** Vite, React, TypeScript, React Router, Cloudflare Pages
 

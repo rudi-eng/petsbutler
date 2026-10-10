@@ -45,7 +45,7 @@ export function Footer() {
         </div>
 
         <div className="footer__bottom">
-          <span>© {new Date().getFullYear()} The Pet's Butler · Centurion, South Africa</span>
+          <span>© {new Date().getFullYear()} The Pet's Butler · Part of <a href="https://aslanaintelligence.com/" target="_blank" rel="noreferrer">Aslana Intelligence (Pty) Ltd</a> · Centurion, South Africa</span>
           <span>Made with 🐾 in Gauteng</span>
         </div>
       </div>

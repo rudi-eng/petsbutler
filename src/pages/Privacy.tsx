@@ -9,7 +9,7 @@ export default function Privacy() {
         <p><strong>Last reviewed: 10 October 2026.</strong> This notice describes The Pet’s Butler website and booking contact process in line with South Africa’s <a href="https://www.gov.za/documents/protection-personal-information-act" target="_blank" rel="noreferrer">Protection of Personal Information Act (POPIA)</a>. Please contact us if something is unclear or you want to exercise a privacy right.</p>
 
         <h2>Who handles your information?</h2>
-        <p>The Pet’s Butler, based in Rooihuiskraal, Centurion, is responsible for enquiries made through this website. For privacy requests, contact <a href={`mailto:${business.email}`}>{business.email}</a> or call <a href={`tel:${business.phonePrimary.replace(/\s/g, '')}`}>{business.phonePrimary}</a>. The website is hosted by Cloudflare Pages. The relationship between the Pet’s Butler and any separate technology provider does not change who you should contact about a booking.</p>
+        <p>The Pet’s Butler is part of <strong>Aslana Intelligence (Pty) Ltd</strong>, the company behind this service. The company is owned by Rudi Beukes. The business is based in Rooihuiskraal, Centurion. For privacy requests, contact us at <a href={`mailto:${business.email}`}>{business.email}</a> or call <a href={`tel:${business.phonePrimary.replace(/\s/g, '')}`}>{business.phonePrimary}</a>. The website is hosted by Cloudflare Pages.</p>
 
         <h2>What we collect and why</h2>
         <ul>
@@ -20,7 +20,7 @@ export default function Privacy() {
         </ul>
 
         <h2>Booking messages and service providers</h2>
-        <p>The booking form does not submit its contents to a database on this website. When you submit it, your device opens WhatsApp with a prepared message; you choose whether to send it. WhatsApp/Meta then processes the message under its own terms and privacy practices, which may involve processing outside South Africa. Do not include information you do not want to share through WhatsApp. We may keep booking conversations in our business WhatsApp account for the time reasonably needed to manage care, safety, records and legal claims, then delete or anonymise them when no longer needed, subject to legal retention duties.</p>
+        <p>The booking form does not submit its contents to a database on this website. When you submit it, your device opens WhatsApp with a prepared message; you choose whether to send it to The Pet’s Butler business account used by Aslana Intelligence (Pty) Ltd. WhatsApp/Meta then processes the message under its own terms and privacy practices, which may involve processing outside South Africa. Do not include information you do not want to share through WhatsApp. Booking conversations may remain in that account while needed to arrange and deliver care, maintain appropriate business records, address safety issues or resolve legal claims. They should be deleted or anonymised when no longer needed, subject to legal retention duties.</p>
         <p>The Google Map is not loaded until you select “Load Google Map”. If you choose to load it, Google may receive connection or device information from your browser. The directions button also opens Google Maps when selected. We removed externally hosted web fonts and this site does not intentionally use advertising or analytics cookies.</p>
 
         <h2>Lawful use, sharing and security</h2>
