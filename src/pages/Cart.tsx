@@ -3,6 +3,7 @@ import { useCart } from '@/context/useCart'
 import { formatZar, business } from '@/data/business'
 import { whatsappLink } from '@/lib/whatsapp'
 import { Placeholder } from '@/components/Placeholder'
+import { PayOnlineButton } from '@/components/PayOnlineButton'
 
 export default function Cart() {
   const { lines, count, total, setQty, remove, clear } = useCart()
@@ -96,6 +97,7 @@ export default function Cart() {
             <a className="btn btn--primary btn--block" href={checkout} target="_blank" rel="noreferrer">
               Checkout via WhatsApp →
             </a>
+            <PayOnlineButton />
           </aside>
         </div>
       </section>

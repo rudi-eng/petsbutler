@@ -561,6 +561,9 @@ button { font-family: inherit; cursor: pointer; }
   font-weight: 800;
   font-size: 1.25rem;
 }
+.pay-online-action { display: grid; gap: .65rem; margin-top: .75rem; }
+.pay-online-notice { padding: .9rem 1rem; border: 1px solid rgba(42,157,143,.2); border-radius: var(--radius-sm); background: rgba(42,157,143,.07); color: var(--teal-dark); line-height: 1.5; }
+.pay-online-notice p { margin: .35rem 0 0; color: var(--muted); font-size: .9rem; }
 .cart-layout { display: grid; grid-template-columns: 1.5fr 1fr; gap: 2rem; align-items: start; }
 @media (max-width: 820px) { .cart-layout { grid-template-columns: 1fr; } .cart-summary { position: static; } }
 

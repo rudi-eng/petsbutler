@@ -4,6 +4,7 @@ import { services } from '@/data/services'
 import { suburbRates } from '@/data/suburbRates'
 import { business, formatZar } from '@/data/business'
 import { whatsappLink } from '@/lib/whatsapp'
+import { PayOnlineButton } from '@/components/PayOnlineButton'
 
 interface SitterAddon {
   id: string
@@ -589,6 +590,7 @@ export default function Booking() {
               {!fullyBooked && !dayPetSittingIneligible && <button className="btn btn--primary btn--block btn--hero" type="submit">
                 Send Booking Request via WhatsApp 🐾
               </button>}
+              {!fullyBooked && !dayPetSittingIneligible && <PayOnlineButton className="btn btn--sand btn--block" />}
               {!fullyBooked && dayPetSittingIneligible && (
                 <div className="booking-full-message" role="status">
                   <div><strong>We can only day-sit puppies and small-breed dogs in our current space.</strong><p>Please call us to discuss another suitable service for your pet.</p><a className="btn btn--primary" href={`tel:${business.phonePrimary.replace(/\s/g, '')}`}>Call {business.phonePrimary}</a></div>
