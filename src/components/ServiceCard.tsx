@@ -4,6 +4,7 @@ import { formatZar } from '@/data/business'
 
 export function ServiceCard({ service }: { service: Service }) {
   const price = formatZar(service.priceFrom)
+  const fullyBooked = service.id === 'dog-walking' || service.id === 'overnight'
 
   return (
     <article className="card">
@@ -34,11 +35,8 @@ export function ServiceCard({ service }: { service: Service }) {
             <br />
             <small className="muted">{service.duration}</small>
           </span>
-          <Link
-            className="btn btn--primary"
-            to={`/booking?service=${service.id}`}
-          >
-            Book Sitter
+          <Link className={`btn ${fullyBooked ? 'btn--sand' : 'btn--primary'}`} to={`/booking?service=${service.id}`}>
+            {fullyBooked ? 'Check status' : 'Book Sitter'}
           </Link>
         </div>
       </div>

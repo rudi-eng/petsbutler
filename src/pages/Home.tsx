@@ -1,16 +1,12 @@
 import { Link } from 'react-router-dom'
 import { ReviewBadge } from '@/components/ReviewBadge'
 import { ServiceCard } from '@/components/ServiceCard'
-import { ProductCardMini } from '@/components/ProductCard'
 import { services } from '@/data/services'
-import { featuredProducts } from '@/data/products'
 import { reviews } from '@/data/reviews'
 import { business } from '@/data/business'
 import { gallery, heroPhoto } from '@/data/gallery'
 
 export default function Home() {
-  const featured = featuredProducts
-
   return (
     <>
       {/* HERO */}
@@ -22,15 +18,14 @@ export default function Home() {
             </div>
             <h1>Your dog's home away from home — in Centurion.</h1>
             <p className="muted" style={{ fontSize: '1.15rem', maxWidth: 540 }}>
-              Premium pet sitting, dog walking & house visits run by a head-butler-of-pets.
-              Cage-free, force-free care, with custom gourmet treats and cosy blankets, plus a boutique store for trendy pet gear.
+              Trusted pet sitting, dog walking and house visits from a Centurion family business founded in 1997. Cage-free, force-free care, with your pet's favourite comforts.
             </p>
             <div className="hero__cta">
               <Link className="btn btn--primary" to="/booking">
                 Book a Sitter →
               </Link>
               <Link className="btn btn--ghost" to="/shop">
-                Shop Pet Gear
+                Shop Coming Soon
               </Link>
             </div>
             <ul style={{ listStyle: 'none', padding: 0, marginTop: '1.5rem', display: 'flex', gap: '1.5rem', flexWrap: 'wrap', color: 'var(--muted)' }}>
@@ -51,13 +46,31 @@ export default function Home() {
         </div>
       </section>
 
+      {/* OUR STORY */}
+      <section className="section story-section">
+        <div className="container story-layout">
+          <div className="story-photos">
+            <img className="story-photo story-photo--main" src="/photos/garden-smile.jpg" alt="A happy dog enjoying a sunny day in Centurion" loading="lazy" />
+            <img className="story-photo story-photo--small" src="/photos/floppy-ears.jpg" alt="A much-loved pet guest at The Pet's Butler" loading="lazy" />
+            <span className="story-stamp" aria-hidden="true">🐾<small>Since<br />1997</small></span>
+          </div>
+          <div className="story-copy">
+            <div className="eyebrow">A Centurion story, from the beginning</div>
+            <h2>Nearly three decades of caring for animals</h2>
+            <p>The Pet's Butler was founded by Rudi Beukes in 1997. Growing up in Centurion, Rudi's love for animals grew into a 29-year path of joy and tears, and a lifelong promise to treat every pet with patience, kindness and care.</p>
+            <p>Today, we're proud to welcome pets and their people from Centurion and across Gauteng. Whether you're planning a walk, a house visit or a cosy stay, your pet is cared for like one of our own.</p>
+            <Link className="btn btn--primary" to="/booking">Meet your pet's butler →</Link>
+          </div>
+        </div>
+      </section>
+
       {/* SERVICES */}
       <section className="section">
         <div className="container">
           <div className="section-head">
             <div className="eyebrow">What we do</div>
             <h2>Premium Pet Care, Tailored for Centurion</h2>
-            <p>Four ways we look after your best friend — select one to build your custom sitter package and add tasty treats.</p>
+            <p>We care for pets across Gauteng. Dog walking and overnight sleepovers are currently fully booked; call us for future availability.</p>
           </div>
           <div className="grid grid--3">
             {services.map((s) => (
@@ -134,21 +147,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FEATURED PRODUCTS */}
+      {/* SHOP RECONSTRUCTION */}
       <section className="section">
-        <div className="container">
+        <div className="container shop-teaser">
           <div className="section-head">
             <div className="eyebrow">Our Boutique Shop</div>
-            <h2>Tried & Tested Trendy Gear</h2>
-            <p>Biliary tick defense, load-shedding walk lights, hands-free leads, and cozy custom dog blankets.</p>
-          </div>
-          <div className="grid grid--4">
-            {featured.map((p) => (
-              <ProductCardMini key={p.id} product={p} />
-            ))}
+            <h2>A thoughtful little shop is on its way</h2>
+            <p>We're currently rebuilding the shop. Soon, we'll share our favourite training treats, enrichment toys, walk essentials and cosy comforts.</p>
           </div>
           <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-            <Link className="btn btn--ghost" to="/shop">Browse the full shop →</Link>
+            <Link className="btn btn--ghost" to="/shop">Visit the shop update →</Link>
           </div>
         </div>
       </section>
@@ -191,7 +199,7 @@ export default function Home() {
               <span className="eyebrow">Find the Butler</span>
               <h2>Located in Centurion</h2>
               <p>
-                Our premium pet care services operate throughout Centurion, Gauteng, with our main boarding home nestled in the peaceful suburb of <strong>The Reeds</strong>.
+                Based in Centurion, we welcome pet families across Gauteng, including Pretoria and Johannesburg. Our home is nestled in the peaceful suburb of <strong>The Reeds</strong>.
               </p>
               
               <ul className="maps-details-list">

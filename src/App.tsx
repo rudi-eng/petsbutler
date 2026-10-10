@@ -2,6 +2,8 @@ import { Routes, Route } from 'react-router-dom'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 import { ScrollToTop } from '@/components/ScrollToTop'
+import { ServiceAreaGate } from '@/components/ServiceAreaGate'
+import { RouteSeo } from '@/components/RouteSeo'
 import { CartProvider } from '@/context/CartContext'
 import Home from '@/pages/Home'
 import Shop from '@/pages/Shop'
@@ -14,6 +16,7 @@ export default function App() {
   return (
     <CartProvider>
       <ScrollToTop />
+      <RouteSeo />
       <Navbar />
       <main>
         <Routes>
@@ -26,6 +29,7 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
+      <ServiceAreaGate />
     </CartProvider>
   )
 }

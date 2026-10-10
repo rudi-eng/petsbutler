@@ -13,6 +13,13 @@ interface SitterAddon {
   petType: 'Dog' | 'Cat' | 'Bird' | 'Other'
 }
 
+interface PetDetails {
+  id: number
+  name: string
+  type: 'Dog' | 'Cat' | 'Bird' | 'Other'
+  info: string
+}
+
 const sitterAddons: SitterAddon[] = [
   // Dogs
   {
@@ -137,9 +144,8 @@ export default function Booking() {
   const [endDate, setEndDate] = useState('')
   const [sessionCount, setSessionCount] = useState(1) // for walks/visits
   const [time, setTime] = useState('09:00')
-  const [petName, setPetName] = useState('')
-  const [petType, setPetType] = useState<'Dog' | 'Cat' | 'Bird' | 'Other'>('Dog')
-  const [petAge, setPetAge] = useState('')
+  const [pets, setPets] = useState<PetDetails[]>([{ id: 1, name: '', type: 'Dog', info: '' }])
+  const [nextPetId, setNextPetId] = useState(2)
   const [ownerName, setOwnerName] = useState('')
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
@@ -155,14 +161,8 @@ export default function Booking() {
   }, [serviceId])
 
   const availableAddons = useMemo(() => {
-    return sitterAddons.filter((a) => a.petType === petType)
-  }, [petType])
-
-  // Clear treats that aren't matching new pet type when pet type changes
-  const handlePetTypeChange = (type: 'Dog' | 'Cat' | 'Bird' | 'Other') => {
-    setPetType(type)
-    setSelectedAddons([])
-  }
+    return sitterAddons.filter((a) => pets.some((pet) => pet.type === a.petType))
+  }, [pets])
 
   // Calculate number of booking days
   const daysCount = useMemo(() => {
@@ -177,6 +177,7 @@ export default function Booking() {
 
   // Automatically adjust sessionCount when date range changes for day services
   const isMultiDayService = selectedService.id === 'overnight' || selectedService.id === 'day-sit'
+  const fullyBooked = selectedService.id === 'dog-walking' || selectedService.id === 'overnight'
 
   // Calculate cost breakdown
   const serviceCost = useMemo(() => {
@@ -191,14 +192,16 @@ export default function Booking() {
     return selectedAddons.map((id) => {
       const addon = sitterAddons.find((a) => a.id === id)!
       const duration = addon.type === 'daily' ? (isMultiDayService ? daysCount : sessionCount) : 1
-      const totalCost = addon.price * duration
+      const petCount = pets.filter((pet) => pet.type === addon.petType).length
+      const totalCost = addon.price * duration * petCount
       return {
         ...addon,
         duration,
+        petCount,
         totalCost,
       }
     })
-  }, [selectedAddons, daysCount, sessionCount, isMultiDayService])
+  }, [selectedAddons, daysCount, sessionCount, isMultiDayService, pets])
 
   const totalCost = useMemo(() => {
     const addonsTotal = addonsBreakdown.reduce((sum, item) => sum + item.totalCost, 0)
@@ -214,6 +217,7 @@ export default function Booking() {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
+    if (fullyBooked) return
 
     const durationText = isMultiDayService
       ? `${daysCount} Day${daysCount > 1 ? 's' : ''} (${startDate} to ${endDate})`
@@ -241,8 +245,10 @@ export default function Booking() {
       `• Base Rate: ${formatZar(selectedService.priceFrom)} (Subtotal: ${formatZar(serviceCost)})`,
       ``,
       `PET DETAILS:`,
-      `• Name: ${petName}`,
-      `• Type: ${petType} (${petAge || 'Not specified'})`,
+      ...pets.flatMap((pet, index) => [
+        `• Pet ${index + 1}: ${pet.name}`,
+        `  Type: ${pet.type} (${pet.info || 'Details not specified'})`,
+      ]),
       ``,
       `ADD-ONS & TREATS:`,
       addonsText,
@@ -271,10 +277,9 @@ export default function Booking() {
       <section className="page-head">
         <div className="container">
           <div className="eyebrow">Booking Portal</div>
-          <h1>State-of-the-Art Booking System</h1>
+          <h1>Request Pet Care in Gauteng</h1>
           <p>
-            Build your perfect booking including daily gourmet treats, premium snacks, and cozy items.
-            Submit to send your order details immediately to the Butler's WhatsApp!
+            Request pet sitting or house visits across Gauteng. Dog walking and overnight sleepovers are currently fully booked; call us for future availability.
           </p>
         </div>
       </section>
@@ -320,7 +325,16 @@ export default function Booking() {
                 <span className="step-badge">Step 2</span>
                 <h2>Schedule & Duration</h2>
                 
-                {isMultiDayService ? (
+                {fullyBooked ? (
+                  <div className="booking-full-message" role="status" aria-live="polite">
+                    <span className="booking-full-message__icon" aria-hidden="true">🐾</span>
+                    <div>
+                      <strong>We're sorry — {selectedService.id === 'overnight' ? 'sleepovers' : 'dog walks'} are currently fully booked.</strong>
+                      <p>We'd love to care for your pet when a space opens up. Please call us and we'll gladly let you know about cancellations or future availability.</p>
+                      <a className="btn btn--primary" href={`tel:${business.phonePrimary.replace(/\s/g, '')}`}>Call {business.phonePrimary}</a>
+                    </div>
+                  </div>
+                ) : isMultiDayService ? (
                   <div className="field--row">
                     <div className="field">
                       <label htmlFor="startDate">Start Date</label>
@@ -389,57 +403,39 @@ export default function Booking() {
                 )}
               </div>
 
+              {!fullyBooked && <>
               {/* STEP 3: PET INFORMATION */}
               <div className="booking-step">
                 <span className="step-badge">Step 3</span>
-                <h2>Tell Us About Your Pet</h2>
-                
-                {/* PET TYPE SELECTOR CARD */}
-                <div className="field">
-                  <label>Pet Category (Loads specific treats below)</label>
-                  <div className="pet-tabs">
-                    {(['Dog', 'Cat', 'Bird', 'Other'] as const).map((type) => (
-                      <button
-                        key={type}
-                        type="button"
-                        className={`pet-tab-btn ${petType === type ? 'active' : ''}`}
-                        onClick={() => handlePetTypeChange(type)}
-                      >
-                        <span style={{ fontSize: '1.4rem' }}>
-                          {type === 'Dog' && '🐶'}
-                          {type === 'Cat' && '🐱'}
-                          {type === 'Bird' && '🐦'}
-                          {type === 'Other' && '🐹'}
-                        </span>
-                        <span>{type}</span>
-                      </button>
-                    ))}
-                  </div>
+                <h2>Tell Us About Your Pets</h2>
+                <p className="muted" style={{ margin: 0 }}>Add each pet joining this booking so we can plan the right care and treats.</p>
+                <div className="booking-pets-list">
+                  {pets.map((pet, index) => (
+                    <div className="booking-pet-card" key={pet.id}>
+                      <div className="booking-pet-card__heading">
+                        <strong>Pet {index + 1}</strong>
+                        {pets.length > 1 && <button type="button" className="remove-btn" onClick={() => setPets((current) => current.filter((item) => item.id !== pet.id))} aria-label={`Remove pet ${index + 1}`}>Remove</button>}
+                      </div>
+                      <div className="field--row">
+                        <div className="field">
+                          <label htmlFor={`petName-${pet.id}`}>Pet's name</label>
+                          <input id={`petName-${pet.id}`} type="text" placeholder="e.g. Milo" value={pet.name} onChange={(e) => setPets((current) => current.map((item) => item.id === pet.id ? { ...item, name: e.target.value } : item))} required />
+                        </div>
+                        <div className="field">
+                          <label htmlFor={`petType-${pet.id}`}>Pet type</label>
+                          <select id={`petType-${pet.id}`} value={pet.type} onChange={(e) => setPets((current) => current.map((item) => item.id === pet.id ? { ...item, type: e.target.value as PetDetails['type'] } : item))}>
+                            <option>Dog</option><option>Cat</option><option>Bird</option><option>Other</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div className="field">
+                        <label htmlFor={`petInfo-${pet.id}`}>Breed, age or special information</label>
+                        <input id={`petInfo-${pet.id}`} type="text" placeholder="e.g. 2-year-old Golden Retriever" value={pet.info} onChange={(e) => setPets((current) => current.map((item) => item.id === pet.id ? { ...item, info: e.target.value } : item))} />
+                      </div>
+                    </div>
+                  ))}
                 </div>
-
-                <div className="field--row">
-                  <div className="field">
-                    <label htmlFor="petName">Pet's Name</label>
-                    <input
-                      id="petName"
-                      type="text"
-                      placeholder="e.g. Milo or Whiskers"
-                      value={petName}
-                      onChange={(e) => setPetName(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div className="field">
-                    <label htmlFor="petAge">Pet's Breed / Age / Special info</label>
-                    <input
-                      id="petAge"
-                      type="text"
-                      placeholder="e.g. 2yo Golden Retriever"
-                      value={petAge}
-                      onChange={(e) => setPetAge(e.target.value)}
-                    />
-                  </div>
-                </div>
+                <button className="btn btn--sand booking-add-pet" type="button" onClick={() => { setPets((current) => [...current, { id: nextPetId, name: '', type: 'Dog', info: '' }]); setNextPetId((id) => id + 1) }}>＋ Add another pet</button>
               </div>
 
               {/* STEP 4: TREATS & COZY MENU */}
@@ -448,7 +444,7 @@ export default function Booking() {
                 <h2>Butler's Treats & Cozy Blanket Menu</h2>
                 <p className="muted" style={{ fontSize: '0.88rem', marginTop: '-0.5rem' }}>
                   Give your pets premium comfort and tasty treats while you are gone. 
-                  Tailored specifically for <strong>{petType}s</strong>!
+                  Tailored to the pet types you've added.
                 </p>
 
                 <div className="treats-selection-list">
@@ -474,7 +470,7 @@ export default function Booking() {
                           <span className="treat-item-desc muted">{addon.desc}</span>
                         </div>
                         <div className="treat-item-price">
-                          <strong>{displayPrice}</strong>
+                      <strong>{displayPrice}{addon.type === 'daily' && pets.filter((pet) => pet.type === addon.petType).length > 1 ? ` × ${pets.filter((pet) => pet.type === addon.petType).length} pets` : ''}</strong>
                         </div>
                       </div>
                     )
@@ -531,15 +527,16 @@ export default function Booking() {
                 </div>
               </div>
 
-              <button className="btn btn--primary btn--block btn--hero" type="submit">
-                Book Instantly via WhatsApp 🐾
-              </button>
+              {!fullyBooked && <button className="btn btn--primary btn--block btn--hero" type="submit">
+                Send Booking Request via WhatsApp 🐾
+              </button>}
 
               {submitted && (
                 <div className="form__success">
                   ✓ Opening WhatsApp conversation with {business.phonePrimary}... If it did not launch, click the button again.
                 </div>
               )}
+              </>}
             </form>
 
             {/* LIVE COST ESTIMATE SIDEBAR */}
@@ -564,7 +561,7 @@ export default function Booking() {
 
                 {addonsBreakdown.length > 0 && (
                   <div className="summary-section">
-                    <span className="summary-section__title">Add-ons & Treats ({petType})</span>
+                    <span className="summary-section__title">Add-ons & Treats</span>
                     {addonsBreakdown.map((item) => (
                       <div className="summary-row" key={item.id}>
                         <span>
@@ -572,8 +569,8 @@ export default function Booking() {
                           <br />
                           <small className="muted">
                             {item.type === 'daily'
-                              ? `${formatZar(item.price)} × ${item.duration} days`
-                              : `${formatZar(item.price)} flat`}
+                              ? `${formatZar(item.price)} × ${item.duration} days × ${item.petCount} ${item.petCount === 1 ? 'pet' : 'pets'}`
+                              : `${formatZar(item.price)} flat × ${item.petCount} ${item.petCount === 1 ? 'pet' : 'pets'}`}
                           </small>
                         </span>
                         <strong>{formatZar(item.totalCost)}</strong>
