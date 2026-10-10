@@ -4,6 +4,8 @@ Centurion pet-care website for The Pet's Butler, part of Aslana Intelligence (Pt
 
 **Live site:** [thepetsbutler.com](https://thepetsbutler.com) · **Stack:** Vite, React, TypeScript, React Router, Cloudflare Pages
 
+The site can be installed as a Progressive Web App (PWA). On the home page, visitors see one optional install explainer with device-specific steps. The choice to dismiss or confirm installation is remembered in browser storage; installed standalone sessions suppress the explainer. The web app manifest supplies 192px, 512px and Apple touch icons. A service worker caches the app shell and same-origin files for previously visited pages, with a small offline contact page as a fallback.
+
 ## Project showcase
 
 ### Visitor and booking flow
@@ -57,6 +59,7 @@ Suburb prices are presented as a selectable list and a calculated estimate, not 
 - `/gallery` — local image gallery and lightbox
 - `/privacy` — browser storage, booking data and third-party service notice
 - `/refunds` — cancellation and refund information
+- PWA — optional home-screen install and offline fallback
 
 Dog walking and overnight stays are marked fully booked. Day pet-sitting is for puppies and small-breed dogs only. Online payments are not enabled; the payment button currently explains that online payment is coming soon.
 
@@ -88,8 +91,10 @@ Cloudflare Pages serves the static Vite build from `dist/`. SPA redirects live i
 | `src/context/CartContext.tsx` | Cart state and 30-day browser storage |
 | `src/data/business.ts` | Business contact details and opening hours |
 | `public/photos/` | Gallery and site photography |
+| `public/manifest.webmanifest`, `public/sw.js`, `public/offline.html` | Installable app metadata, service worker caching and offline fallback |
+| `public/icons/`, `public/apple-touch-icon.png` | App launcher and Apple Home Screen icons |
 | `public/llms.txt`, `public/sitemap.xml` | Search and assistant discovery files |
 
 ## Portfolio notes
 
-Suggested honest CV summary: “Built and documented a responsive React and TypeScript pet-care website with a multi-pet booking flow, suburb-based travel estimates, WhatsApp hand-off, session-scoped service-area prompt, privacy-aware optional map loading, and accessible gallery.” The service-area screen is not an IP geolocation system. There is no embedded video platform, chart dashboard, online payment processing, or server-side booking database in this version.
+Suggested honest CV summary: “Built and documented an installable React and TypeScript pet-care PWA with a multi-pet booking flow, suburb-based travel estimates, WhatsApp hand-off, session-scoped service-area prompt, offline contact fallback, privacy-aware optional map loading, and accessible gallery.” The service-area screen is not an IP geolocation system. There is no embedded video platform, chart dashboard, online payment processing, or server-side booking database in this version.

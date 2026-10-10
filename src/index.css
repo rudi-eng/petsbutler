@@ -407,6 +407,15 @@ button { font-family: inherit; cursor: pointer; }
 .policy-page p, .policy-page li { color: #504b46; }
 .policy-page li + li { margin-top: 0.6rem; }
 .policy-page a { color: var(--teal-dark); text-underline-offset: 0.15em; }
+.pwa-promo-section { background: var(--sand); }
+.pwa-card { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 1.25rem; padding: clamp(1.25rem, 3vw, 2rem); background: var(--white); border: 1px solid rgba(42,157,143,0.18); border-radius: var(--radius); box-shadow: var(--shadow); }
+.pwa-card__icon { width: 3.5rem; height: 3.5rem; display: grid; place-items: center; border-radius: 1rem; background: rgba(42,157,143,0.13); font-size: 1.8rem; }
+.pwa-card__copy h2 { font-size: clamp(1.25rem, 2.5vw, 1.7rem); margin-bottom: 0.35rem; }
+.pwa-card__copy p { margin: 0; color: var(--muted); }
+.pwa-card__actions { display: grid; justify-items: center; gap: 0.55rem; }
+.pwa-card__dismiss, .pwa-card__installed { border: 0; padding: 0.3rem 0.5rem; background: transparent; color: var(--muted); text-decoration: underline; text-underline-offset: 0.16em; cursor: pointer; font: inherit; }
+.pwa-card__instructions { margin-top: 0.8rem; padding: 0.85rem 1rem; border-radius: var(--radius-sm); background: var(--sand-light); color: var(--charcoal); }
+.pwa-card__installed { margin-left: 0.5rem; color: var(--teal-dark); font-weight: 700; }
 
 /* Shop line filter */
 .line-filter {
@@ -1130,4 +1139,14 @@ button { font-family: inherit; cursor: pointer; }
   font-size: 1.1rem;
   border-radius: var(--radius);
   box-shadow: 0 6px 20px rgba(42, 157, 143, 0.25);
+}
+
+@media (max-width: 760px) {
+  .pwa-card { grid-template-columns: auto minmax(0, 1fr); align-items: start; }
+  .pwa-card__actions { grid-column: 1 / -1; display: flex; justify-content: flex-start; flex-wrap: wrap; }
+}
+
+@media (max-width: 480px) {
+  .pwa-card { grid-template-columns: 1fr; }
+  .pwa-card__actions { grid-column: auto; }
 }

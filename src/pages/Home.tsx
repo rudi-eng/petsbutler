@@ -6,6 +6,7 @@ import { services } from '@/data/services'
 import { reviews } from '@/data/reviews'
 import { business } from '@/data/business'
 import { gallery, heroPhoto } from '@/data/gallery'
+import { PwaInstallCard } from '@/components/PwaInstallCard'
 
 export default function Home() {
   const [mapLoaded, setMapLoaded] = useState(false)
@@ -47,6 +48,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <PwaInstallCard />
 
       {/* OUR STORY */}
       <section className="section story-section">

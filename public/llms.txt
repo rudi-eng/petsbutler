@@ -29,5 +29,7 @@ The Pet's Butler is part of Aslana Intelligence (Pty) Ltd, owned by founder Rudi
 
 The online shop is currently under reconstruction. The future collection is being planned around reward-sized training bites, single-ingredient treats, dental chews, lick mats, puzzle and sniff toys, treat pouches, poo bags, reflective walk gear, car safety tethers and washable blankets. Treats are only provided with the pet owner's permission and instructions.
 
+The website can be added to a phone Home Screen as a Progressive Web App. It includes a one-time install explainer, app icon, and offline contact fallback; the service worker caches only same-origin website files.
+
 ## Local travel rates
 Dog walking and house visits include local travel from Rooihuiskraal: R100 in Rooihuiskraal, The Reeds and Wierda Park; R120 in Amberfield, Thatchfield and Rooihuiskraal North; R125 in Eldoraigne; up to R150 in the extended Centurion area. Choose a suburb in the booking form to see its per-visit rate. Other Centurion suburbs should be confirmed by phone.
