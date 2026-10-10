@@ -1,6 +1,7 @@
 import { useState, useMemo, type FormEvent } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { services } from '@/data/services'
+import { suburbRates } from '@/data/suburbRates'
 import { business, formatZar } from '@/data/business'
 import { whatsappLink } from '@/lib/whatsapp'
 
@@ -18,6 +19,7 @@ interface PetDetails {
   name: string
   type: 'Dog' | 'Cat' | 'Bird' | 'Other'
   info: string
+  dayCareSize: '' | 'puppy' | 'small-adult' | 'larger-adult'
 }
 
 const sitterAddons: SitterAddon[] = [
@@ -144,8 +146,9 @@ export default function Booking() {
   const [endDate, setEndDate] = useState('')
   const [sessionCount, setSessionCount] = useState(1) // for walks/visits
   const [time, setTime] = useState('09:00')
-  const [pets, setPets] = useState<PetDetails[]>([{ id: 1, name: '', type: 'Dog', info: '' }])
+  const [pets, setPets] = useState<PetDetails[]>([{ id: 1, name: '', type: 'Dog', info: '', dayCareSize: '' }])
   const [nextPetId, setNextPetId] = useState(2)
+  const [suburbId, setSuburbId] = useState('')
   const [ownerName, setOwnerName] = useState('')
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
@@ -178,15 +181,21 @@ export default function Booking() {
   // Automatically adjust sessionCount when date range changes for day services
   const isMultiDayService = selectedService.id === 'overnight' || selectedService.id === 'day-sit'
   const fullyBooked = selectedService.id === 'dog-walking' || selectedService.id === 'overnight'
+  const needsTravelRate = selectedService.id === 'dog-walking' || selectedService.id === 'house-visit'
+  const selectedSuburb = suburbRates.find((suburb) => suburb.id === suburbId)
+  const ratePerVisit = needsTravelRate && selectedSuburb ? selectedSuburb.rate : selectedService.priceFrom
+  const dayPetSittingIneligible = selectedService.id === 'day-sit' && pets.some((pet) =>
+    pet.type !== 'Dog' || pet.dayCareSize === 'larger-adult',
+  )
 
   // Calculate cost breakdown
   const serviceCost = useMemo(() => {
     if (isMultiDayService) {
       return selectedService.priceFrom * daysCount
     } else {
-      return selectedService.priceFrom * sessionCount
+      return ratePerVisit * sessionCount
     }
-  }, [selectedService, isMultiDayService, daysCount, sessionCount])
+  }, [selectedService, isMultiDayService, daysCount, sessionCount, ratePerVisit])
 
   const addonsBreakdown = useMemo(() => {
     return selectedAddons.map((id) => {
@@ -217,7 +226,7 @@ export default function Booking() {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
-    if (fullyBooked) return
+    if (fullyBooked || dayPetSittingIneligible) return
 
     const durationText = isMultiDayService
       ? `${daysCount} Day${daysCount > 1 ? 's' : ''} (${startDate} to ${endDate})`
@@ -241,13 +250,14 @@ export default function Booking() {
       `------------------------------------------`,
       `SERVICE DETAILS:`,
       `• Service: ${selectedService.name}`,
+      selectedSuburb && `• Suburb: ${selectedSuburb.name} (travel included)`,
       `• Schedule/Duration: ${durationText}`,
-      `• Base Rate: ${formatZar(selectedService.priceFrom)} (Subtotal: ${formatZar(serviceCost)})`,
+      `• Base Rate: ${formatZar(isMultiDayService ? selectedService.priceFrom : ratePerVisit)}${needsTravelRate && selectedSuburb ? ` including travel to ${selectedSuburb.name}` : ''} (Subtotal: ${formatZar(serviceCost)})`,
       ``,
       `PET DETAILS:`,
       ...pets.flatMap((pet, index) => [
         `• Pet ${index + 1}: ${pet.name}`,
-        `  Type: ${pet.type} (${pet.info || 'Details not specified'})`,
+        `  Type: ${pet.type}${selectedService.id === 'day-sit' && pet.dayCareSize ? `, ${pet.dayCareSize === 'puppy' ? 'puppy' : pet.dayCareSize === 'small-adult' ? 'small-breed adult' : 'larger-breed adult'}` : ''} (${pet.info || 'Details not specified'})`,
       ]),
       ``,
       `ADD-ONS & TREATS:`,
@@ -318,12 +328,31 @@ export default function Booking() {
                     </label>
                   ))}
                 </div>
+                {selectedService.id === 'day-sit' && (
+                  <div className="pet-size-notice" role="note">
+                    <strong>Day pet-sitting takes place at our Rooihuiskraal home.</strong>
+                    <span>We can accommodate puppies and small-breed dogs only. Unfortunately, our space is too small for larger breeds.</span>
+                  </div>
+                )}
               </div>
 
               {/* STEP 2: DATES & SCHEDULE */}
               <div className="booking-step">
                 <span className="step-badge">Step 2</span>
                 <h2>Schedule & Duration</h2>
+
+                {needsTravelRate && (
+                  <div className="field suburb-rate-field">
+                    <label htmlFor="serviceSuburb">Your suburb · travel included (R100–R150 per visit)</label>
+                    <select id="serviceSuburb" value={suburbId} onChange={(e) => setSuburbId(e.target.value)} required={selectedService.id === 'house-visit'}>
+                      <option value="">Choose your suburb to see the rate</option>
+                      {suburbRates.map((suburb) => (
+                        <option key={suburb.id} value={suburb.id}>{suburb.name} · {formatZar(suburb.rate)} per visit</option>
+                      ))}
+                    </select>
+                    <small className="muted">Rates include the visit or walk and local travel from Rooihuiskraal. For dog walks, choose an area to see the rate while we are fully booked.</small>
+                  </div>
+                )}
                 
                 {fullyBooked ? (
                   <div className="booking-full-message" role="status" aria-live="polite">
@@ -429,13 +458,27 @@ export default function Booking() {
                         </div>
                       </div>
                       <div className="field">
-                        <label htmlFor={`petInfo-${pet.id}`}>Breed, age or special information</label>
-                        <input id={`petInfo-${pet.id}`} type="text" placeholder="e.g. 2-year-old Golden Retriever" value={pet.info} onChange={(e) => setPets((current) => current.map((item) => item.id === pet.id ? { ...item, info: e.target.value } : item))} />
+                        <label htmlFor={`petInfo-${pet.id}`}>{selectedService.id === 'day-sit' ? "Pet's breed and age" : 'Breed, age or special information'}</label>
+                        <input id={`petInfo-${pet.id}`} type="text" placeholder="e.g. 2-year-old Toy Poodle" value={pet.info} onChange={(e) => setPets((current) => current.map((item) => item.id === pet.id ? { ...item, info: e.target.value } : item))} required={selectedService.id === 'day-sit'} />
                       </div>
+                      {selectedService.id === 'day-sit' && pet.type === 'Dog' && (
+                        <div className="field">
+                          <label htmlFor={`petSize-${pet.id}`}>Day-sitting size</label>
+                          <select id={`petSize-${pet.id}`} value={pet.dayCareSize} onChange={(e) => setPets((current) => current.map((item) => item.id === pet.id ? { ...item, dayCareSize: e.target.value as PetDetails['dayCareSize'] } : item))} required>
+                            <option value="">Choose one</option>
+                            <option value="puppy">Puppy</option>
+                            <option value="small-adult">Small-breed adult</option>
+                            <option value="larger-adult">Medium or large adult breed</option>
+                          </select>
+                        </div>
+                      )}
+                      {selectedService.id === 'day-sit' && pet.type !== 'Dog' && (
+                        <p className="pet-size-notice" role="status">Day pet-sitting is currently available for puppies and small-breed dogs only.</p>
+                      )}
                     </div>
                   ))}
                 </div>
-                <button className="btn btn--sand booking-add-pet" type="button" onClick={() => { setPets((current) => [...current, { id: nextPetId, name: '', type: 'Dog', info: '' }]); setNextPetId((id) => id + 1) }}>＋ Add another pet</button>
+                <button className="btn btn--sand booking-add-pet" type="button" onClick={() => { setPets((current) => [...current, { id: nextPetId, name: '', type: 'Dog', info: '', dayCareSize: '' }]); setNextPetId((id) => id + 1) }}>＋ Add another pet</button>
               </div>
 
               {/* STEP 4: TREATS & COZY MENU */}
@@ -527,9 +570,14 @@ export default function Booking() {
                 </div>
               </div>
 
-              {!fullyBooked && <button className="btn btn--primary btn--block btn--hero" type="submit">
+              {!fullyBooked && !dayPetSittingIneligible && <button className="btn btn--primary btn--block btn--hero" type="submit">
                 Send Booking Request via WhatsApp 🐾
               </button>}
+              {!fullyBooked && dayPetSittingIneligible && (
+                <div className="booking-full-message" role="status">
+                  <div><strong>We can only day-sit puppies and small-breed dogs in our current space.</strong><p>Please call us to discuss another suitable service for your pet.</p><a className="btn btn--primary" href={`tel:${business.phonePrimary.replace(/\s/g, '')}`}>Call {business.phonePrimary}</a></div>
+                </div>
+              )}
 
               {submitted && (
                 <div className="form__success">
@@ -558,7 +606,7 @@ export default function Booking() {
                       <small className="muted">
                         {isMultiDayService
                           ? `${formatZar(selectedService.priceFrom)} × ${daysCount} days`
-                          : `${formatZar(selectedService.priceFrom)} × ${sessionCount} walks/visits`}
+                          : `${selectedSuburb ? formatZar(ratePerVisit) : `from ${formatZar(ratePerVisit)}`} × ${sessionCount} walks/visits${needsTravelRate ? ' · travel included' : ''}`}
                       </small>
                     </span>
                     <strong>{formatZar(serviceCost)}</strong>

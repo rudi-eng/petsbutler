@@ -9,7 +9,7 @@ export const business = {
   email: 'hello@thepetsbutler.co.za',
   address: {
     line1: '28 Langtoon Ave',
-    line2: 'The Reeds',
+    line2: 'Rooihuiskraal',
     city: 'Centurion',
     province: 'Gauteng',
     postalCode: '0157',

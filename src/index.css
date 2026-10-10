@@ -730,6 +730,10 @@ button { font-family: inherit; cursor: pointer; }
 .booking-pet-card { display: grid; gap: 1rem; padding: 1rem; border: 1px solid rgba(35,33,31,.12); border-radius: var(--radius-sm); background: var(--sand-light); }
 .booking-pet-card__heading { display: flex; align-items: center; justify-content: space-between; color: var(--teal-dark); }
 .booking-add-pet { justify-self: start; }
+.suburb-rate-field { padding: 1rem; border-radius: var(--radius-sm); background: var(--sand-light); }
+.suburb-rate-field small { line-height: 1.5; }
+.pet-size-notice { display: grid; gap: .35rem; padding: 1rem; border-radius: var(--radius-sm); background: rgba(42,157,143,.09); color: var(--teal-dark); line-height: 1.5; }
+.service-area-note { max-width: 760px; margin: -.5rem auto 1.5rem; padding: .85rem 1rem; border-left: 3px solid var(--teal); background: rgba(42,157,143,.07); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; text-align: left; color: var(--muted); font-size: .9rem; line-height: 1.55; }
 .booking-full-message { display: grid; grid-template-columns: auto 1fr; align-items: start; gap: 1rem; padding: 1.25rem; border: 1px solid rgba(189,111,55,.25); border-left: 5px solid #cf8451; border-radius: var(--radius-sm); background: #fff7ef; color: var(--charcoal); }
 .booking-full-message__icon { font-size: 1.8rem; }
 .booking-full-message p { margin: .5rem 0 1rem; color: var(--muted); line-height: 1.55; }

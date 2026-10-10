@@ -71,6 +71,7 @@ export default function Home() {
             <div className="eyebrow">What we do</div>
             <h2>Premium Pet Care, Tailored for Centurion</h2>
             <p>We care for pets across Gauteng. Dog walking and overnight sleepovers are currently fully booked; call us for future availability.</p>
+            <p className="service-area-note">Walks and house visits include local travel from Rooihuiskraal: R100 nearby, R120–R125 in surrounding suburbs, and up to R150 in the extended Centurion area. Day-sitting at our home is for puppies and small breeds only.</p>
           </div>
           <div className="grid grid--3">
             {services.map((s) => (
@@ -199,7 +200,7 @@ export default function Home() {
               <span className="eyebrow">Find the Butler</span>
               <h2>Located in Centurion</h2>
               <p>
-                Based in Centurion, we welcome pet families across Gauteng, including Pretoria and Johannesburg. Our home is nestled in the peaceful suburb of <strong>The Reeds</strong>.
+                Based in Centurion, we welcome pet families across Gauteng, including Pretoria and Johannesburg. Our home base is in <strong>Rooihuiskraal</strong>.
               </p>
               
               <ul className="maps-details-list">
