@@ -48,6 +48,6 @@ export const services: Service[] = [
     priceFrom: 350,
     icon: '🌙',
     image: '/photos/rainbow-burrito.jpg',
-    desc: 'Sleepovers in a real home, not a kennel. Your dog lives as part of the family — couch privileges, evening walks and photo updates arranged with you.',
+    desc: 'The sitter stays overnight at your home, so your dog can sleep in familiar surroundings instead of a kennel. Evening walks, their usual routine and photo updates are arranged with you.',
   },
 ]
