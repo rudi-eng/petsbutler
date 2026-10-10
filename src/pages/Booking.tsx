@@ -5,6 +5,7 @@ import { suburbRates } from '@/data/suburbRates'
 import { business, formatZar } from '@/data/business'
 import { whatsappLink } from '@/lib/whatsapp'
 import { PayOnlineButton } from '@/components/PayOnlineButton'
+import { Link } from 'react-router-dom'
 
 interface SitterAddon {
   id: string
@@ -309,6 +310,7 @@ export default function Booking() {
             
             {/* BOOKING WIZARD FORM */}
             <form className="booking-form" onSubmit={handleSubmit}>
+              <p className="privacy-inline-note">Your booking details are added to a WhatsApp message only when you submit this form. Read our <Link to="/privacy">Privacy & browser storage notice</Link> before sharing them.</p>
               
               {/* STEP 1: SERVICE CHOICE */}
               <div className="booking-step">

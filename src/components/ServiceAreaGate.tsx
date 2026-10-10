@@ -7,13 +7,21 @@ const storageKey = 'pets-butler-service-area-choice'
 
 export function ServiceAreaGate() {
   const [choice, setChoice] = useState<AccessChoice>(() => {
-    const saved = window.localStorage.getItem(storageKey)
-    return saved === 'outside' ? 'outside' : saved === 'gauteng' || saved === 'client' ? saved : null
+    try {
+      const saved = window.sessionStorage.getItem(storageKey)
+      return saved === 'outside' ? 'outside' : saved === 'gauteng' || saved === 'client' ? saved : null
+    } catch {
+      return null
+    }
   })
+
+  const saveChoice = (value: Exclude<AccessChoice, null>) => {
+    try { window.sessionStorage.setItem(storageKey, value) } catch { /* keep the prompt usable if storage is disabled */ }
+  }
 
   useEffect(() => {
     const allowClientAccess = () => {
-      window.localStorage.setItem(storageKey, 'client')
+      saveChoice('client')
       setChoice('client')
     }
     window.addEventListener('pets-butler-client-access', allowClientAccess)
@@ -23,7 +31,7 @@ export function ServiceAreaGate() {
   if (choice === 'gauteng' || choice === 'client') return null
 
   const selectArea = (next: Exclude<AccessChoice, null>) => {
-    window.localStorage.setItem(storageKey, next)
+    saveChoice(next)
     setChoice(next)
   }
 

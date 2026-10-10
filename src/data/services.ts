@@ -28,7 +28,7 @@ export const services: Service[] = [
     priceFrom: 100,
     icon: '🚶',
     image: '/photos/german-shepherd.jpg',
-    desc: 'Solo or small-group lead walks in Rooihuiskraal and nearby Centurion suburbs. Travel is included in the local per-visit rate. Regular photo/video updates with every visit.',
+    desc: 'Solo or small-group lead walks in Rooihuiskraal and nearby Centurion suburbs. Travel is included in the local per-visit rate. Photo/video updates can be arranged with your consent.',
   },
   {
     id: 'house-visit',
@@ -48,6 +48,6 @@ export const services: Service[] = [
     priceFrom: 350,
     icon: '🌙',
     image: '/photos/rainbow-burrito.jpg',
-    desc: 'Sleepovers in a real home, not a kennel. Your dog lives as part of the family — couch privileges, evening walks and a photo diary every morning.',
+    desc: 'Sleepovers in a real home, not a kennel. Your dog lives as part of the family — couch privileges, evening walks and photo updates arranged with you.',
   },
 ]

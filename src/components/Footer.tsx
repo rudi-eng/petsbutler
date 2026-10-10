@@ -23,6 +23,8 @@ export function Footer() {
               <li><Link to="/booking">Book a service</Link></li>
               <li><Link to="/shop">Shop</Link></li>
               <li><Link to="/gallery">Gallery</Link></li>
+              <li><Link to="/privacy">Privacy & browser storage</Link></li>
+              <li><Link to="/refunds">Cancellations & refunds</Link></li>
             </ul>
           </div>
 

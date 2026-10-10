@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom'
 const routeMetadata: Record<string, { title: string; description: string }> = {
   '/': {
     title: "The Pet's Butler | Pet Sitting & Dog Walking in Centurion, Gauteng",
-    description: "The Pet's Butler has cared for pets since 1997. Book pet sitting, dog walking and house visits in Centurion, Pretoria and Johannesburg, Gauteng. Call +27 82 853 4385.",
+    description: "The Pet's Butler has cared for pets since 1997. Book pet sitting, dog walking and house visits from Rooihuiskraal, Centurion and across Gauteng. Call +27 82 853 4385.",
   },
   '/booking': {
     title: 'Book a Pet Sitter or Dog Walker in Centurion | The Pet’s Butler',
@@ -21,6 +21,14 @@ const routeMetadata: Record<string, { title: string; description: string }> = {
   '/cart': {
     title: 'Your Cart | The Pet’s Butler',
     description: 'Review your selected items from The Pet’s Butler boutique shop.',
+  },
+  '/privacy': {
+    title: 'Privacy & Browser Storage | The Pet’s Butler Centurion',
+    description: 'How The Pet’s Butler handles booking details, WhatsApp messages, essential browser storage, and optional Google Maps on its Centurion pet-care website.',
+  },
+  '/refunds': {
+    title: 'Cancellations & Refunds | The Pet’s Butler Centurion',
+    description: 'Booking cancellation, product returns and refund information for The Pet’s Butler in Centurion, Gauteng, subject to South African consumer law.',
   },
 }
 

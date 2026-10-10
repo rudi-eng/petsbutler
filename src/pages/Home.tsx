@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ReviewBadge } from '@/components/ReviewBadge'
 import { ServiceCard } from '@/components/ServiceCard'
@@ -7,6 +8,7 @@ import { business } from '@/data/business'
 import { gallery, heroPhoto } from '@/data/gallery'
 
 export default function Home() {
+  const [mapLoaded, setMapLoaded] = useState(false)
   return (
     <>
       {/* HERO */}
@@ -30,7 +32,7 @@ export default function Home() {
             </div>
             <ul style={{ listStyle: 'none', padding: 0, marginTop: '1.5rem', display: 'flex', gap: '1.5rem', flexWrap: 'wrap', color: 'var(--muted)' }}>
               <li>✓ Same-day replies</li>
-              <li>✓ Daily photo/video updates</li>
+              <li>✓ Photo/video updates by arrangement</li>
               <li>✓ Free meet-and-greet</li>
             </ul>
           </div>
@@ -117,7 +119,7 @@ export default function Home() {
             </div></div>
             <div className="card"><div className="card__body">
               <h3 className="card__title">Daily Photo/Video Diaries</h3>
-              <p className="card__desc">Morning updates, afternoon play videos, and meal check-ins with every single booking. Peace of mind guaranteed.</p>
+              <p className="card__desc">We share reassuring photo and video updates during your pet's stay, agreed with you when we confirm the booking.</p>
             </div></div>
             <div className="card"><div className="card__body">
               <h3 className="card__title">Bespoke Treats & Comfort</h3>
@@ -238,15 +240,24 @@ export default function Home() {
             </div>
 
             <div className="maps-embed-card">
-              <iframe
-                src="https://maps.google.com/maps?q=-25.9057969,28.1504777&z=15&output=embed"
-                width="100%"
-                height="100%"
-                style={{ border: 0, minHeight: '340px', borderRadius: 'var(--radius)' }}
-                allowFullScreen
-                loading="lazy"
-                title="The Pet's Butler Centurion Google Maps Location"
-              ></iframe>
+              {mapLoaded ? (
+                <iframe
+                  src="https://maps.google.com/maps?q=-25.9057969,28.1504777&z=15&output=embed"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, minHeight: '340px', borderRadius: 'var(--radius)' }}
+                  allowFullScreen
+                  loading="lazy"
+                  title="The Pet's Butler Centurion Google Maps Location"
+                />
+              ) : (
+                <div className="map-consent-card">
+                  <span aria-hidden="true">📍</span>
+                  <h3>See our Centurion area on Google Maps</h3>
+                  <p>Google Maps is an external service. Loading it may share your device and connection details with Google.</p>
+                  <button className="btn btn--primary" type="button" onClick={() => setMapLoaded(true)}>Load Google Map</button>
+                </div>
+              )}
             </div>
           </div>
         </div>

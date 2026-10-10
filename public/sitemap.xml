@@ -4,4 +4,6 @@
   <url><loc>https://thepetsbutler.com/booking</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://thepetsbutler.com/gallery</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://thepetsbutler.com/shop</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://thepetsbutler.com/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://thepetsbutler.com/refunds</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>

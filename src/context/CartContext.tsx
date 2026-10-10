@@ -26,13 +26,27 @@ const CartContext = createContext<CartContextValue | null>(null)
 export { CartContext }
 
 const STORAGE_KEY = 'petsbutler-cart'
+const CART_MAX_AGE_MS = 30 * 24 * 60 * 60 * 1000
+
+function readSavedCart(): CartLine[] {
+  try {
+    const raw = window.localStorage.getItem(STORAGE_KEY)
+    if (!raw) return []
+    const saved: unknown = JSON.parse(raw)
+    if (Array.isArray(saved)) return saved as CartLine[]
+    if (!saved || typeof saved !== 'object' || !('lines' in saved) || !('savedAt' in saved)) return []
+    const cart = saved as { lines: CartLine[]; savedAt: number }
+    return Date.now() - cart.savedAt <= CART_MAX_AGE_MS ? cart.lines : []
+  } catch {
+    return []
+  }
+}
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [lines, setLines] = useState<CartLine[]>(() => {
     if (typeof window === 'undefined') return []
     try {
-      const raw = window.localStorage.getItem(STORAGE_KEY)
-      return raw ? (JSON.parse(raw) as CartLine[]) : []
+      return readSavedCart()
     } catch {
       return []
     }
@@ -40,7 +54,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(lines))
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ lines, savedAt: Date.now() }))
     } catch {
       /* ignore quota errors */
     }
