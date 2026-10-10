@@ -299,7 +299,7 @@ export default function Booking() {
           <div className="eyebrow">Booking Portal</div>
           <h1>Request Pet Care in Gauteng</h1>
           <p>
-            Request pet sitting or house visits across Gauteng. Dog walking and overnight sleepovers are currently fully booked; call us for future availability.
+            Request pet sitting or house visits across Gauteng. Dog walking and overnight pet sitting at your home are currently fully booked; call us for future availability.
           </p>
         </div>
       </section>
@@ -369,7 +369,7 @@ export default function Booking() {
                   <div className="booking-full-message" role="status" aria-live="polite">
                     <span className="booking-full-message__icon" aria-hidden="true">🐾</span>
                     <div>
-                      <strong>We're sorry — {selectedService.id === 'overnight' ? 'sleepovers' : 'dog walks'} are currently fully booked.</strong>
+                      <strong>We're sorry — {selectedService.id === 'overnight' ? 'overnight pet sitting at your home' : 'dog walks'} are currently fully booked.</strong>
                       <p>We'd love to care for your pet when a space opens up. Please call us and we'll gladly let you know about cancellations or future availability.</p>
                       <a className="btn btn--primary" href={`tel:${business.phonePrimary.replace(/\s/g, '')}`}>Call {business.phonePrimary}</a>
                     </div>

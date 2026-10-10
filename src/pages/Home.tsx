@@ -75,7 +75,7 @@ export default function Home() {
           <div className="section-head">
             <div className="eyebrow">What we do</div>
             <h2>Premium Pet Care, Tailored for Centurion</h2>
-            <p>We care for pets across Gauteng. Dog walking and overnight sleepovers are currently fully booked; call us for future availability.</p>
+            <p>We care for pets across Gauteng. Dog walking and overnight pet sitting at your home are currently fully booked; call us for future availability.</p>
             <p className="service-area-note">Walks and house visits include local travel from Rooihuiskraal: R100 nearby, R120–R125 in surrounding suburbs, and up to R150 in the extended Centurion area. Day-sitting at our home is for puppies and small breeds only.</p>
           </div>
           <div className="grid grid--3">
@@ -118,7 +118,7 @@ export default function Home() {
           <div className="grid grid--3">
             <div className="card"><div className="card__body">
               <h3 className="card__title">Cage-free, force-free</h3>
-              <p className="card__desc">No kennels, no cold floors. Your dog lives as part of our loving family — couch privileges and comfortable blankets included.</p>
+              <p className="card__desc">For overnight care, the sitter stays at your home so your pet can keep familiar surroundings, their usual routine and favourite comforts.</p>
             </div></div>
             <div className="card"><div className="card__body">
               <h3 className="card__title">Daily Photo/Video Diaries</h3>

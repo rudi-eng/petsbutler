@@ -42,12 +42,12 @@ export const services: Service[] = [
   },
   {
     id: 'overnight',
-    name: 'Overnight Boarding',
-    short: 'Multi-day stays in a home setting',
+    name: 'Overnight Pet Sitting at Your Home',
+    short: 'The sitter stays overnight in your home',
     duration: '24h cycle',
     priceFrom: 350,
     icon: '🌙',
     image: '/photos/rainbow-burrito.jpg',
-    desc: 'The sitter stays overnight at your home, so your dog can sleep in familiar surroundings instead of a kennel. Evening walks, their usual routine and photo updates are arranged with you.',
+    desc: 'The sitter sleeps at your home, so your dog stays in familiar surroundings and keeps their usual routine. Evening walks and photo updates are arranged with you.',
   },
 ]
