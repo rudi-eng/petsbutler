@@ -1,4 +1,4 @@
-const CACHE_NAME = 'petsbutler-app-v1'
+const CACHE_NAME = 'petsbutler-app-v2'
 const APP_SHELL = ['/', '/?source=pwa', '/index.html', '/offline.html', '/manifest.webmanifest', '/pwa-icon.svg', '/apple-touch-icon.png', '/icons/pwa-192.png', '/icons/pwa-512.png', '/logo.svg', '/logo.jpg']
 
 self.addEventListener('install', (event) => {
