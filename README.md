@@ -44,6 +44,8 @@ The form does not post booking details to an application server or database. Sub
 
 The gallery currently displays locally stored image assets from `public/photos/`. The website does not host video uploads or an embedded video player. Any care updates promised for an accepted booking are arranged directly with that client; confirm the agreed channel and sharing preferences before sending photos or video. No customer media is uploaded to this repository by the booking flow.
 
+Client pet photos are used in the public gallery only with the owner's permission. The business requests permission separately through WhatsApp before using a pet photo or video on the website or in marketing; care updates are not repurposed for promotion by default.
+
 Suburb prices are presented as a selectable list and a calculated estimate, not as a chart. The Mermaid diagrams above document the actual visitor and data paths. There is no analytics dashboard or customer-data graph in the current application.
 
 ## Pages

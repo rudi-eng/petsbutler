@@ -32,6 +32,9 @@ export default function Privacy() {
         <h2>Children and pet information</h2>
         <p>This website is intended for adults arranging animal care. Please do not submit a child’s personal information. Pet details can identify or relate to an owner when linked to a booking, so we handle them as carefully as the owner’s contact details.</p>
 
+        <h2>Pet photos and videos</h2>
+        <p>We share care updates with a pet’s owner using the channel and preferences agreed for that booking. We do not reuse care-update photos or videos for promotion by default. Before putting a client pet’s photo or video on this website or in other marketing, we ask that pet’s owner separately for permission over WhatsApp and use it only if they agree. The owners of pets currently pictured in our gallery have agreed to their photos being shown. An owner can withdraw permission for future use by contacting us; we will remove the relevant image from channels we control as soon as reasonably practical.</p>
+
         <h2>Updates</h2>
         <p>We may update this notice when the website or our practices change. The latest version will be published on this page.</p>
         <p><Link to="/refunds">Read our cancellation and refund information</Link> or <Link to="/booking">request a booking</Link>.</p>
