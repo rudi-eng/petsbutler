@@ -20,8 +20,8 @@ export function PayOnlineButton({ className = 'btn btn--sand btn--block' }: PayO
       </button>
       {showNotice && (
         <div className="pay-online-notice" id="pay-online-notice" role="status" aria-live="polite">
-          <strong>Online payment is coming soon.</strong>
-          <p>Before online payments are enabled, please request a pre-approval code from the owner via WhatsApp. PayFast or FastPay.io will be added once online payment setup is complete.</p>
+          <strong>Online payments are coming soon.</strong>
+          <p>Please use WhatsApp checkout for now. We look forward to offering online payments soon.</p>
         </div>
       )}
     </div>
