@@ -11,13 +11,13 @@ interface SitterAddon {
   desc: string
   price: number
   type: 'daily' | 'flat'
-  petType: 'Dog' | 'Cat' | 'Bird' | 'Other'
+  petType: 'Dog' | 'Cat' | 'Bird' | 'Fish' | 'Snake' | 'Other'
 }
 
 interface PetDetails {
   id: number
   name: string
-  type: 'Dog' | 'Cat' | 'Bird' | 'Other'
+  type: 'Dog' | 'Cat' | 'Bird' | 'Fish' | 'Snake' | 'Other'
   info: string
   dayCareSize: '' | 'puppy' | 'small-adult' | 'larger-adult'
 }
@@ -453,7 +453,12 @@ export default function Booking() {
                         <div className="field">
                           <label htmlFor={`petType-${pet.id}`}>Pet type</label>
                           <select id={`petType-${pet.id}`} value={pet.type} onChange={(e) => setPets((current) => current.map((item) => item.id === pet.id ? { ...item, type: e.target.value as PetDetails['type'] } : item))}>
-                            <option>Dog</option><option>Cat</option><option>Bird</option><option>Other</option>
+                            <option value="Dog">🐶 Dog</option>
+                            <option value="Cat">🐱 Cat</option>
+                            <option value="Bird">🐦 Bird</option>
+                            <option value="Fish">🐟 Fish</option>
+                            <option value="Snake">🐍 Snake</option>
+                            <option value="Other">🐾 Other</option>
                           </select>
                         </div>
                       </div>

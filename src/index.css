@@ -711,6 +711,10 @@ button { font-family: inherit; cursor: pointer; }
 .shop-rebuild__card .shop-rebuild__lead { color: var(--charcoal); font-size: 1.12rem; }
 .shop-rebuild__categories { display: flex; justify-content: center; flex-wrap: wrap; gap: .55rem; margin: 1.5rem 0; }
 .shop-rebuild__categories span { padding: .5rem .85rem; border-radius: 999px; background: rgba(42,157,143,.1); color: var(--teal-dark); font-weight: 600; font-size: .86rem; }
+.shop-rebuild__source { max-width: 610px; margin: 1.5rem auto; padding: 1rem 1.1rem; border: 1px solid rgba(42,157,143,.2); border-radius: var(--radius-sm); background: rgba(42,157,143,.06); text-align: left; }
+.shop-rebuild__source > strong { color: var(--teal-dark); }
+.shop-rebuild__source p { margin: .5rem 0; font-size: .9rem; }
+.shop-rebuild__source a { color: var(--teal-dark); font-weight: 700; }
 .shop-rebuild__card .shop-rebuild__note { padding: .9rem 1rem; border-radius: var(--radius-sm); background: var(--sand-light); font-size: .9rem; }
 .shop-rebuild__actions { display: flex; justify-content: center; flex-wrap: wrap; gap: .75rem; margin-top: 1.5rem; }
 .shop-rebuild__paw { position: absolute; bottom: -12px; right: 22px; font-size: 3rem; opacity: .1; transform: rotate(-20deg); }
