@@ -145,6 +145,7 @@ export default function PupArazzi() {
                 <label htmlFor="pup-story">A short story about {petName.trim() || 'your pet'}</label>
                 <textarea id="pup-story" name="story" value={story} onChange={(event) => { setStory(event.target.value); setSubmitted(false) }} maxLength={240} placeholder="What makes your pet unforgettable?" required />
                 <small className="form__hint">{story.length}/240 characters</small>
+                <small className="form__hint">Your story may be shown publicly if approved. Please leave out contact details and exact home addresses.</small>
               </div>
 
               <label className="pup-consent">
