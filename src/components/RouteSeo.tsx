@@ -10,9 +10,13 @@ const routeMetadata: Record<string, { title: string; description: string }> = {
     title: 'Book a Pet Sitter or Dog Walker in Centurion | The Pet’s Butler',
     description: 'Request home-style pet sitting, house visits and dog walking in Centurion and across Gauteng. Add each pet and share care instructions with The Pet’s Butler.',
   },
+  '/pup-arazzi': {
+    title: 'Pup-arazzi | Centurion Pet Photos & Stories | The Pet’s Butler',
+    description: 'Share your pet’s photo and short story with Pup-arazzi, The Pet’s Butler’s moderated Centurion community pet wall. Posts are reviewed and only published with permission.',
+  },
   '/gallery': {
-    title: 'Happy Pet Guests in Centurion | The Pet’s Butler Gallery',
-    description: 'Meet some of the dogs, cats and other much-loved pets cared for by The Pet’s Butler in Centurion, Gauteng.',
+    title: 'Pet Sitting Client Gallery in Centurion | The Pet’s Butler',
+    description: 'A gallery of pet photos from The Pet’s Butler’s Centurion pet-sitting clients.',
   },
   '/shop': {
     title: 'Pet Treats, Walking Gear & Toys Coming Soon | The Pet’s Butler',

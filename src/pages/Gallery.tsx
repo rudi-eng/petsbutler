@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { gallery } from '@/data/gallery'
 import { Lightbox } from '@/components/Lightbox'
 
@@ -16,9 +17,9 @@ export default function Gallery() {
     <>
       <section className="page-head">
         <div className="container">
-          <div className="eyebrow">Gallery</div>
-          <h1>Life at the butler's</h1>
-          <p>A peek at walks, sleepovers and happy tails we've cared for in Centurion.</p>
+          <div className="eyebrow">The Pet’s Butler album</div>
+          <h1>Life at the butler’s</h1>
+          <p>A peek at happy pets we’ve cared for in Centurion. <Link to="/pup-arazzi">Visit Pup-arazzi</Link> to share with the wider community.</p>
         </div>
       </section>
 

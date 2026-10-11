@@ -22,7 +22,8 @@ The Pet's Butler is part of Aslana Intelligence (Pty) Ltd, owned by founder Rudi
 ## Website pages
 - Home: https://thepetsbutler.com/
 - Booking information: https://thepetsbutler.com/booking
-- Pet gallery: https://thepetsbutler.com/gallery
+- Pup-arazzi, a separate moderated pet photo and story community open to Centurion pet owners (no client booking required): https://thepetsbutler.com/pup-arazzi
+- Pet sitting client gallery: https://thepetsbutler.com/gallery
 - Boutique shop update: https://thepetsbutler.com/shop
 - Privacy and browser storage: https://thepetsbutler.com/privacy
 - Cancellations and refunds: https://thepetsbutler.com/refunds

@@ -8,6 +8,7 @@ const links = [
   { to: '/booking', label: 'Booking' },
   { to: '/shop', label: 'Shop' },
   { to: '/gallery', label: 'Gallery' },
+  { to: '/pup-arazzi', label: 'Pup-arazzi' },
 ]
 
 export function Navbar() {

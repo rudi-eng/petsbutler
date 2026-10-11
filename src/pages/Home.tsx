@@ -136,9 +136,9 @@ export default function Home() {
       <section className="section section--tight">
         <div className="container">
           <div className="section-head">
-            <div className="eyebrow">Gallery</div>
+            <div className="eyebrow">Client gallery</div>
             <h2>Life at the butler's</h2>
-            <p>Real guests, happy tails — a peek at walks, sleepovers, and house visits in Centurion.</p>
+            <p>Real guests, happy tails — a peek at walks, sleepovers and house visits in Centurion.</p>
           </div>
           <div className="photo-strip">
             {gallery.slice(0, 8).map((item) => (
@@ -148,7 +148,22 @@ export default function Home() {
             ))}
           </div>
           <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-            <Link className="btn btn--ghost" to="/gallery">See the full gallery →</Link>
+            <Link className="btn btn--ghost" to="/gallery">See the full client gallery →</Link>
+          </div>
+        </div>
+      </section>
+
+      {/* PUP-ARAZZI COMMUNITY */}
+      <section className="section section--tight pup-home-section">
+        <div className="container">
+          <div className="pup-home-teaser">
+            <span className="pup-submit-icon" aria-hidden="true">📸</span>
+            <div>
+              <div className="eyebrow">A Centurion pet community</div>
+              <h2>Meet Pup-arazzi</h2>
+              <p>A separate photo-and-story wall for Centurion pet people. Everyone is welcome, whether or not you’re a Pet’s Butler client.</p>
+            </div>
+            <Link className="btn btn--primary" to="/pup-arazzi">Visit Pup-arazzi →</Link>
           </div>
         </div>
       </section>

@@ -22,7 +22,8 @@ export function Footer() {
               <li><Link to="/">Home</Link></li>
               <li><Link to="/booking">Book a service</Link></li>
               <li><Link to="/shop">Shop</Link></li>
-              <li><Link to="/gallery">Gallery</Link></li>
+              <li><Link to="/gallery">Client gallery</Link></li>
+              <li><Link to="/pup-arazzi">Pup-arazzi community</Link></li>
               <li><Link to="/privacy">Privacy & browser storage</Link></li>
               <li><Link to="/refunds">Cancellations & refunds</Link></li>
             </ul>

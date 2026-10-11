@@ -44,19 +44,20 @@ The form does not post booking details to an application server or database. Sub
 
 ### Photos, video and charts
 
-The gallery currently displays locally stored image assets from `public/photos/`. The website does not host video uploads or an embedded video player. Any care updates promised for an accepted booking are arranged directly with that client; confirm the agreed channel and sharing preferences before sending photos or video. No customer media is uploaded to this repository by the booking flow.
+The client gallery displays local image assets from `public/photos/`. Pup-arazzi is a separate, moderated community for any Centurion pet owner; a booking with The Pet’s Butler is not required. It provides a WhatsApp submission flow for pet photos and short stories. The selected image is previewed in the browser but is not uploaded to this website; visitors attach it themselves in WhatsApp. Approved community posts are added by hand to `src/data/pupArazziPosts.ts` after permission is confirmed. There are no member accounts, automatic posts, likes, comments or server-side uploads. The website does not host video uploads or an embedded video player. Any care updates promised for an accepted booking are arranged directly with that client; confirm the agreed channel and sharing preferences before sending photos or video.
 
-Client pet photos are used in the public gallery only with the owner's permission. The business requests permission separately through WhatsApp before using a pet photo or video on the website or in marketing; care updates are not repurposed for promotion by default.
+Client pet photos are used in the client gallery only with the owner's permission. Pup-arazzi is separate and open to Centurion pet owners whether or not they are clients; the business reviews each submission before publication and asks for clear permission in the WhatsApp conversation. Care updates are not repurposed for promotion by default.
 
 Suburb prices are presented as a selectable list and a calculated estimate, not as a chart. The Mermaid diagrams above document the actual visitor and data paths. There is no analytics dashboard or customer-data graph in the current application.
 
 ## Pages
 
-- `/` — business story, service overview, gallery preview and contact/map area
+- `/` — business story, service overview, client gallery preview, Pup-arazzi invitation and contact/map area
 - `/booking` — service request, multiple pets, suburb travel estimate and care options
 - `/shop` — shop reconstruction notice
 - `/cart` — saved cart review and WhatsApp enquiry
-- `/gallery` — local image gallery and lightbox
+- `/pup-arazzi` — separate moderated Centurion pet photo and story community with WhatsApp submissions
+- `/gallery` — The Pet’s Butler client gallery and lightbox
 - `/privacy` — browser storage, booking data and third-party service notice
 - `/refunds` — cancellation and refund information
 - PWA — optional home-screen install and offline fallback
@@ -97,4 +98,4 @@ Cloudflare Pages serves the static Vite build from `dist/`. SPA redirects live i
 
 ## Portfolio notes
 
-Suggested honest CV summary: “Built and documented an installable React and TypeScript pet-care PWA with a multi-pet booking flow, suburb-based travel estimates, WhatsApp hand-off, session-scoped service-area prompt, offline contact fallback, privacy-aware optional map loading, and accessible gallery.” The service-area screen is not an IP geolocation system. There is no embedded video platform, chart dashboard, online payment processing, or server-side booking database in this version.
+Suggested honest CV summary: “Built and documented an installable React and TypeScript pet-care PWA with a multi-pet booking flow, suburb-based travel estimates, a permission-first moderated community pet-story submission flow, WhatsApp hand-off, session-scoped service-area prompt, offline contact fallback, privacy-aware optional map loading, and separate client and community photo walls.” The service-area screen is not an IP geolocation system. There is no embedded video platform, chart dashboard, online payment processing, member account system, or server-side booking database in this version.

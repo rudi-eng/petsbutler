@@ -10,6 +10,7 @@ import Shop from '@/pages/Shop'
 import Cart from '@/pages/Cart'
 import Booking from '@/pages/Booking'
 import Gallery from '@/pages/Gallery'
+import PupArazzi from '@/pages/PupArazzi'
 import NotFound from '@/pages/NotFound'
 import Privacy from '@/pages/Privacy'
 import Refunds from '@/pages/Refunds'
@@ -26,6 +27,7 @@ export default function App() {
           <Route path="/shop" element={<Shop />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/booking" element={<Booking />} />
+          <Route path="/pup-arazzi" element={<PupArazzi />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/refunds" element={<Refunds />} />
