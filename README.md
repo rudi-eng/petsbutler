@@ -6,7 +6,7 @@ Centurion pet-care website for The Pet's Butler, part of Aslana Intelligence (Pt
 
 The site can be installed as a Progressive Web App (PWA). On the home page, visitors see one optional install explainer with device-specific steps. The choice to dismiss or confirm installation is remembered in browser storage; installed standalone sessions suppress the explainer. The web app manifest supplies 192px, 512px and Apple touch icons. A service worker caches the app shell and same-origin files for previously visited pages, with a small offline contact page as a fallback.
 
-## Project showcase
+## Project overview
 
 ### Visitor and booking flow
 
@@ -23,7 +23,7 @@ flowchart TD
   I --> J[Owner confirms availability and final terms]
 ```
 
-The area prompt is a **self-selected service-area gate** stored in `sessionStorage` for the current browser session. It does not inspect a visitor's IP address or verify their province; people outside Gauteng can still continue using the existing-client option. Service eligibility is confirmed with the owner. Describe it as a service-area flow in a portfolio, not as verified geolocation or a security boundary.
+The area prompt is a **self-selected service-area gate** stored in `sessionStorage` for the current browser session. It does not inspect a visitor's IP address or verify their province; people outside Gauteng can still continue using the existing-client option. Service eligibility is confirmed with the owner. This prompt is a convenience for visitors, not a geolocation check or security boundary.
 
 ### Local travel estimate
 
@@ -62,7 +62,7 @@ Suburb prices are presented as a selectable list and a calculated estimate, not 
 - `/refunds` — cancellation and refund information
 - PWA — optional home-screen install and offline fallback
 
-Dog walking and overnight stays are marked fully booked. Day pet-sitting is for puppies and small-breed dogs only. Online payments are not enabled; the payment button currently explains that online payment is coming soon.
+Dog walking and overnight stays are marked fully booked. Day pet-sitting is for puppies and small-breed dogs only. Online payments are not enabled; the payment button tells visitors that online payment is unavailable at this time.
 
 ## Run locally
 
@@ -96,6 +96,3 @@ Cloudflare Pages serves the static Vite build from `dist/`. SPA redirects live i
 | `public/icons/`, `public/apple-touch-icon.png` | App launcher and Apple Home Screen icons |
 | `public/llms.txt`, `public/sitemap.xml` | Search and assistant discovery files |
 
-## Portfolio notes
-
-Suggested honest CV summary: “Built and documented an installable React and TypeScript pet-care PWA with a multi-pet booking flow, suburb-based travel estimates, a permission-first moderated community pet-story submission flow, WhatsApp hand-off, session-scoped service-area prompt, offline contact fallback, privacy-aware optional map loading, and separate client and community photo walls.” The service-area screen is not an IP geolocation system. There is no embedded video platform, chart dashboard, online payment processing, member account system, or server-side booking database in this version.
